@@ -313,42 +313,13 @@ int main(int argc, char *argv[]) {
         return 1; // Exit if loading fails.
     }
 
-    /* Create a modified copy of the input image */
-    struct Image *modified_img = copy_image(in_img);
-    if (modified_img == NULL) {
-        fprintf(stderr, "Failed to create a modified image.\n");
-        free_image(ref_img);
-        free_image(in_img);
-        return 1; // Exit if copying fails.
-    }
-
-    /* Modify a few pixels in the image to simulate a change */
-    for (int i = 0; i < 5; i++) {
-        // Increase the red component of the first 5 pixels by 50 (with modulo 255 to stay within range)
-        modified_img->pixels[i].red = (modified_img->pixels[i].red + 50) % 255;
-    }
-
-    /* Save the modified image */
-    if (!save_image(modified_img, "HPDEC/bars_modified.hpdec")) {
-        fprintf(stderr, "Failed to save modified image.\n");
-        free_image(ref_img);
-        free_image(in_img);
-        free_image(modified_img);
-        return 1; // Exit if saving fails.
-    }
-
-    /* Compare the reference image with the modified image */
-    apply_COMP(ref_img, modified_img);
-
     /* Apply a blur effect to the input image */
     struct Image *out_img = apply_BLUR(in_img);
 
-    
     if (out_img == NULL) {
         fprintf(stderr, "BLUR process failed.\n");
         free_image(ref_img);
         free_image(in_img);
-        free_image(modified_img);
         return 1; // Exit if blurring fails.
     }
 
@@ -357,10 +328,12 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Saving image to %s failed.\n", argv[3]);
     }
 
+    /* Compare the reference image with the modified image */
+    apply_COMP(in_img, out_img);
+
     /* Free allocated memory */
     free_image(ref_img);
     free_image(in_img);
-    free_image(modified_img);
     free_image(out_img);
 
     return 0; // Successful execution.
