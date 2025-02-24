@@ -77,7 +77,7 @@ To detect **changes** between an original and a modified image:
 Identical pixels: 73435  
 Different pixels: 38743  
 ```
-This indicates that **five pixels** have been altered.  
+This indicates that **38743 pixels** have been altered.  
 
 ---
 
