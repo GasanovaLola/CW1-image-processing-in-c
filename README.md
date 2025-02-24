@@ -16,8 +16,8 @@ The software operates via a command-line interface, ensuring efficient image pro
 
 ### **1. Clone the Repository**  
 ```sh
-git clone https://github.com/your-username/hpdec-image-processing.git
-cd hpdec-image-processing
+git clone https://github.com/GasanovaLola/CW1-image-processing-in-c.git
+cd CW1-image-processing-in-c
 ```
 
 ### **2. Compile the Program**  
